@@ -1,0 +1,8 @@
+.active{
+    background: rgba(196, 187, 187, 0.52);
+    padding: 10px 0 10px 40px;
+    border-right: 10px solid;
+    border-radius: 0 5px 5px 0;
+    color: gray;
+    transition: .2s;
+}

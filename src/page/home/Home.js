@@ -1,20 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import axios from "axios";
+import Card from "../../components/ui/card/Card";
+import Banner from "../../components/ui/banner/Banner";
+import Pagination from "../../components/ui/pagination/Pagination";
+import Spiner from "../../svg/Spiner";
+import TvShow from "../../components/tvShow/TvShow";
+import BannerTv from "../../components/ui/bannerTv/BannerTv";
 
 const Home = () => {
     const [movies, setMovies] = useState([])
     const [selectedTab, setSelectedTab] = useState(0)
+    const [movieBanner, setMovieBanner] = useState({})
+    const [movieBannerTv, setMovieBannerTv] = useState({})
+    const [page, setPage] = useState(1)
+    const [loading, setLoading] = useState(true)
     useEffect(() => {
+        setLoading(true)
+        getMovieTv()
         getPopularMovies()
-    }, [])
+    }, [page])
+
 
     function getPopularMovies() {
-        axios.get("https://api.themoviedb.org/3/movie/now_playing?api_key=f42c53f4f985e0480ab807c5d464b681&language=ru-RU&page=1")
+        const randomNumber = Math.floor(Math.random() * 20)
+        axios.get(`https://api.themoviedb.org/3/movie/now_playing?api_key=f42c53f4f985e0480ab807c5d464b681&language=ru-RU&page=${page}`)
             .then(({data}) => {
+                setMovieBanner(data.results[randomNumber])
                 setMovies(data)
+                setLoading(false)
                 console.log(data)
             })
     }
+
+    function getMovieTv() {
+        const randomNumber = Math.floor(Math.random() * 20)
+        axios("https://api.themoviedb.org/3/tv/popular?api_key=f42c53f4f985e0480ab807c5d464b681&language=ru-RU&page=1")
+            .then(({data}) => {
+                setMovieBannerTv(data.results[randomNumber])
+            })
+    }
+
 
     const movieTabs = ["Movie", "TV Show", "Anime"]
 
@@ -22,9 +47,10 @@ const Home = () => {
         setSelectedTab(index)
     }
 
+
     return (
         <div>
-            <div className="mt-6 flex items-center gap-6">
+            <div className="mt-6 flex items-center gap-6 text-lg">
                 {movieTabs.map((movieTabs, index) => (
                     <span className=" ml-3 cursor-pointer"
                           style={{color: index === selectedTab ? "blue" : "#535B64"}}
@@ -35,24 +61,33 @@ const Home = () => {
                    </span>
                 ))}
             </div>
-            <div className="flex flex-wrap gap-3 justify-content-center">
-                {movies?.results?.map(movie => (
-
-                    <div className="w-[200px] h-[300px] bg-[red] mt-6 rounded-5 " style={{background: `url( ${`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}) no-repeat center/contain`}}>
-                        <div className="flex items-end">
-                        <div className="mt-[140%] ml-3 w-[50px] h-[50px] bg-[#2A3EBF] rounded-full  position-relative flex items-center justify-content-center ">
-                            <div className="border-amber-300 position-absolute w-[40px] h-[40px] bg-[black]  flex items-center justify-content-center  rounded-full text-white text-sm" >
-                            {`${movie.vote_average}%`}
-                            </div>
-                        </div>
-                        <button className="px-[10px] py-[4px]  ml-4 mb-2 rounded-2  border-blue-600 border-2 font-semibold bg-[#2A3EBF] text-white ">
-                        Watch Now
-                        </button>
+            {loading ? <Spiner/> : selectedTab === 0 &&
+                <>
+                    <div>
+                        <Banner movie={movieBanner}/>
                     </div>
-
+                    <div className="flex flex-wrap gap-3 justify-content-center">
+                        {movies?.results?.map((movie) => (
+                            <Card movie={movie}/>
+                        ))}
                     </div>
-                ))}
-            </div>
+                </>
+            }
+            {selectedTab === 1 &&
+                <>
+                        <BannerTv movie={movieBannerTv}/>
+                    <div className="flex flex-wrap justify-content-center gap-3">
+                        <TvShow />
+                    </div>
+                </>
+
+            }
+            <Pagination
+                currentPage={page}
+                allPage={movies?.total_pages}
+                onChangePage={(page) => setPage(page)}
+            />
+
         </div>
     );
 };

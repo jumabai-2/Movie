@@ -1,21 +1,22 @@
 import React from 'react';
 import {MDBIcon} from "mdb-react-ui-kit";
-import {Link} from "react-router-dom";
+import {NavLink} from "react-router-dom";
+import './style.css'
 
 const LeftNavbar = () => {
     return (
-        <div className="border-solid border-r-2 border-blue-[#C4CCD4] h-[100%] w-[200px] fixed left-[0]">
+        <div className="border-solid border-r-2 border-blue-[#C4CCD4] h-[100%] w-[200px] fixed left-[0] overflow-y-scroll">
 
             <div className=" px-[40px] pt-6">
          <p className="text-base"> <MDBIcon fas icon="eye" className="pr-1"/> Nonton</p>
           </div>
             <div className=" mt-6 flex flex-col">
                 <h1 className="text-base px-[37px] text-[#C4CCD4] ">MENU</h1>
-                <Link to={'/'} className="text-base text-[#535B64] px-[40px] hover:text-[#2A3EBF]"> <MDBIcon fas icon="home" className="pr-1"/> Home</Link>
-                <Link to={'/community'} className="text-base px-[40px] text-[#535B64] mt-2 hover:text-[#2A3EBF]"> <MDBIcon fas icon="shield-alt" className="pr-1"/> Community</Link>
-                <Link to={'/discover'} className="text-base px-[40px] text-[#535B64] mt-2 hover:text-[#2A3EBF]"> <MDBIcon fas icon="compass" className="pr-1"/>  Discover</Link>
-                <Link to={''} className="text-base px-[40px] text-[#535B64] mt-2 hover:text-[#2A3EBF]"> <MDBIcon fas icon="award" className="pr-1"/> Awards</Link>
-                <Link to={''} className="text-base px-[40px] text-[#535B64] mt-2 hover:text-[#2A3EBF]"> <MDBIcon fas icon="user" className="pr-1"/> Celebs</Link>
+                <NavLink to={'/'} className="text-base text-[#535B64] px-[40px] hover:text-[#2A3EBF]"> <MDBIcon fas icon="home" className="pr-1"/> Home</NavLink>
+                <NavLink to={'/community'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="shield-alt" className="pr-1"/> Community</NavLink>
+                <NavLink to={'/discover'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="compass" className="pr-1"/>  Discover</NavLink>
+                <NavLink to={'/awards'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="award" className="pr-1"/> Awards</NavLink>
+                <NavLink to={'celebs'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="user" className="pr-1"/> Celebs</NavLink>
             </div>
             <div className="library mt-9">
                 <h1 className="text-base px-[37px] text-[#C4CCD4]">LIBRARY</h1>
