@@ -1,4 +1,4 @@
 .movie{
-    filter: blur(3px);
+    filter: blur(2px);
     background: rgba(0, 0, 0, 0.82);
 }

@@ -40,14 +40,11 @@ const Home = () => {
             })
     }
 
-
     const movieTabs = ["Movie", "TV Show", "Anime"]
 
     function selectTabs(index) {
         setSelectedTab(index)
     }
-
-
     return (
         <div>
             <div className="mt-6 flex items-center gap-6 text-lg">
@@ -67,27 +64,28 @@ const Home = () => {
                         <Banner movie={movieBanner}/>
                     </div>
                     <div className="flex flex-wrap gap-3 justify-content-center">
-                        {movies?.results?.map((movie) => (
+                        {movies?.results.filter(el => el?.poster_path).map((movie) => (
                             <Card movie={movie}/>
                         ))}
                     </div>
                 </>
             }
-            {selectedTab === 1 &&
+            {loading ? <Spiner/> : selectedTab === 1 &&
                 <>
-                        <BannerTv movie={movieBannerTv}/>
+                    <BannerTv movie={movieBannerTv}/>
                     <div className="flex flex-wrap justify-content-center gap-3">
-                        <TvShow />
+                        <TvShow/>
                     </div>
                 </>
 
             }
+            <div className="mt-[30px] ml-[100px]">
             <Pagination
                 currentPage={page}
-                allPage={movies?.total_pages}
+                allPages={movies.total_pages}
                 onChangePage={(page) => setPage(page)}
             />
-
+        </div>
         </div>
     );
 };

@@ -8,7 +8,6 @@ const Banner = ({movie}) => {
     }
     return (
         <div className="flex justify-content-center">
-
             <div className="w-[90%] h-[400px] bg-[black] mt-6 rounded-lg"
                  style={{background: `url( ${`https://image.tmdb.org/t/p/w1280/${movie.backdrop_path}`}) no-repeat center/cover`}}
             >

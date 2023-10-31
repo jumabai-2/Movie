@@ -13,7 +13,7 @@ const LeftNavbar = () => {
             <div className=" mt-6 flex flex-col">
                 <h1 className="text-base px-[37px] text-[#C4CCD4] ">MENU</h1>
                 <NavLink to={'/'} className="text-base text-[#535B64] px-[40px] hover:text-[#2A3EBF]"> <MDBIcon fas icon="home" className="pr-1"/> Home</NavLink>
-                <NavLink to={'/community'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="shield-alt" className="pr-1"/> Community</NavLink>
+                <NavLink to={'/community'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF] flex items-center"> <MDBIcon fas icon="shield-alt" className="pr-1"/> Community</NavLink>
                 <NavLink to={'/discover'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="compass" className="pr-1"/>  Discover</NavLink>
                 <NavLink to={'/awards'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="award" className="pr-1"/> Awards</NavLink>
                 <NavLink to={'celebs'} className="text-base px-[40px] text-[#535B64] mt-4 hover:text-[#2A3EBF]"> <MDBIcon fas icon="user" className="pr-1"/> Celebs</NavLink>
@@ -22,7 +22,7 @@ const LeftNavbar = () => {
                 <h1 className="text-base px-[37px] text-[#C4CCD4]">LIBRARY</h1>
                 <p className="text-base px-[40px] text-[#535B64]"> <MDBIcon fas icon="clock" className="pr-1"/> Recent</p>
                 <p className="text-base px-[40px] text-[#535B64]"> <MDBIcon fas icon="star" className="pr-1"/> Top Rated</p>
-                <p className="text-base px-[40px] text-[#535B64]"> <MDBIcon fas icon="cloud-download-alt" className="pr-1"/>  Downloaded</p>
+                <p className="text-base px-[40px] text-[#535B64] flex items-center"> <MDBIcon fas icon="cloud-download-alt" className="pr-1"/>  Downloaded</p>
             </div>
             <div className="mt-9">
                 <h1 className=" text-base px-[37px] text-[#C4CCD4]">CATEGORY</h1>

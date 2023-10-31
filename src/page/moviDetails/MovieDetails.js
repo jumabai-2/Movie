@@ -7,11 +7,12 @@ const MovieDetails = () => {
     const {id} = useParams()
     const [movie, setMovie] = useState()
     const [moviePerson, setMoviePerson] = useState()
+
     useEffect(() => {
         getPerson()
-    })
+    },[id])
     useEffect(() => {
-        axios(`https://api.themoviedb.org/3/movie/${id}?api_key=f42c53f4f985e0480ab807c5d464b681&language=ru-RU`)
+        axios(`https://api.themoviedb.org/3/movie/${id}?api_key=f42c53f4f985e0480ab807c5d464b681&language=en-US`)
             .then(({data}) => {
                 setMovie(data)
                 console.log(data)
@@ -27,29 +28,29 @@ const MovieDetails = () => {
     }
 
     return (
-        <div>
-            <div className="movie w-[1000px] h-[600px] rounded-5 position-relative"
-                 style={{background: `url( ${`https://image.tmdb.org/t/p/w1280/${movie?.backdrop_path}`}) no-repeat center/contain`}}
-            >
+    <div>
+        <div className="movie w-[1000px] h-[600px] rounded-5 position-relative"
+             style={{background: `url( ${`https://image.tmdb.org/t/p/w1280/${movie?.backdrop_path}`}) no-repeat center/contain`}}
+        >
+        </div>
+        <div className="flex  position-absolute top-[100px] ">
+            <img className="rounded-5 w-[300px]"
+                 src={`https://image.tmdb.org/t/p/w1280/${movie?.poster_path}`}
+                 alt="img"
+            />
+            <div>
+                <h2 className="text-white ml-[100px]">
+                    {movie?.title}
+                </h2>
+                <p className="w-[600px] ml-[100px] text-white">{movie?.overview}</p>
+                <p className="ml-[100px] text-white">{`Дата выхода.${movie?.release_date}`}</p>
+                <p className="ml-[100px] text-white">{`Популярность.${movie?.popularity}`}</p>
+                <p className="ml-[100px] text-white">{`Жанр.${movie?.genres[1]?.name}`}</p>
             </div>
-            <div className="flex  position-absolute top-[100px] ">
-                <img className="rounded-5 w-[300px]"
-                     src={`https://image.tmdb.org/t/p/w1280/${movie?.poster_path}`}
-                     alt="img"
-                />
-                <div>
-                    <h2 className="text-white ml-[100px]">
-                        {movie?.title}
-                    </h2>
-                    <p className="w-[600px] ml-[100px] text-white">{movie?.overview}</p>
-                    <p className="ml-[100px] text-white">{`Дата выхода.${movie?.release_date}`}</p>
-                    <p className="ml-[100px] text-white">{`Популярность.${movie?.popularity}`}</p>
-                    <p className="ml-[100px] text-white">{`Жанр.${movie?.genres[1]?.name}`}</p>
-                </div>
 
-            </div>
-            <div className="mt-[50px]"><h1>В главны ролях</h1></div>
-            <div className="flex gap-2 max-w-[1000px] overflow-x-scroll">
+        </div>
+        <div className="mt-[50px]"><h1>В главны ролях</h1></div>
+        <div className="flex gap-2 max-w-[1000px] overflow-x-scroll">
             {
                 moviePerson?.cast.map((person) => person?.profile_path &&(
                     <div className=" border-1  min-w-[200px]">
@@ -65,8 +66,8 @@ const MovieDetails = () => {
 
                 ))
             }
-            </div>
         </div>
+    </div>
     );
 };
 
